@@ -5,13 +5,13 @@ import CharComponent from "./CharComponent/CharComponent";
 
 class App extends Component {
   state = {
-    input: "",
+    input: '',
     size: 0
   };
 
   render() {
-    let chars = this.state.input.split("").map(char => {
-      return <CharComponent letter={char} />;
+    let chars = this.state.input.split('').map((char, index) => {
+      return <CharComponent letter={char} click={() => this.deleteLetterHandler(index)}/>;
     });
     return (
       <div className="App">
@@ -20,14 +20,20 @@ class App extends Component {
           onChange={this.changeInputHandler.bind(this)}
         />
         <p>{this.state.input}</p>
-        <ValidationComponent size={this.state.size} />
+        <ValidationComponent size={this.state.input.length} />
         {chars}
       </div>
     );
   }
 
   changeInputHandler(evt) {
-    this.setState({ input: evt.target.value, size: evt.target.value.length });
+    this.setState({ input: evt.target.value});
+  }
+  
+  deleteLetterHandler(index){
+    const letters = [...this.state.input.split('')];
+    letters.splice(index, 1);
+    this.setState({input: letters.join('')})
   }
 }
 

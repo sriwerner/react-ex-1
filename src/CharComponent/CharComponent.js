@@ -1,8 +1,8 @@
 import React from "react";
 import "./CharComponent.css";
 
-const charComponent = prop => {
-  return <div className="char">{prop.letter}</div>;
+const charComponent = props => {
+  return <div className="char" onClick={props.click}>{props.letter}</div>;
 };
 
 export default charComponent;
